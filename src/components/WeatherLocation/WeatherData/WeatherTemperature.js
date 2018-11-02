@@ -6,45 +6,45 @@ import { IoMdCloudy } from 'react-icons/io';
 import { IoMdThunderstorm } from 'react-icons/io';
 import { IoMdRainy } from 'react-icons/io';
 import { IoMdSnow } from 'react-icons/io';
-import {
-    CLOUD,
-    CLOUDY,
-    SUN,
-    RAIN,
-    SNOW,
-    STORM,
-} from './../../../constants/weathers';
+// import {
+//     CLOUDS,
+//     CLOUDY,
+//     SUN,
+//     RAIN,
+//     SNOW,
+//     STORM,
+// } from './../../../constants/weathers';
 import './styles.css';
 
-const icons = {
-    [CLOUD]: 'cloud',
-    [CLOUDY]: 'cloudy',
-    [SUN]: 'sun',
-    [RAIN]: 'rain',
-    [SNOW]: 'snow',
-    [STORM]: 'storm',
+// const icons = {
+//     [CLOUDS]: 'Clouds',
+//     [CLOUDY]: 'Cloudy',
+//     [SUN]: 'Sun',
+//     [RAIN]: 'Rain',
+//     [SNOW]: 'Snow',
+//     [STORM]: 'Storm',
 
-};
+// };
 const getWeatherIcon = weatherState => {
-    const icon = icons[weatherState];
-    const sizeIcon ='4x';
-    if(icon === 'snow')
-        return <IoMdSnow className='wicon' size='40px'/>       
+    const icon = weatherState;
+    // const sizeIcon ='4x';
+    if(icon === 'Snow')
+        return <IoMdSnow className='wicon' size='65px'/>       
     
-    else if (icon === 'cloud')
-        return  <IoMdCloudy className='wicon' size='40px'/>
+    else if (icon === 'Clouds')
+        return  <IoMdCloudy className='wicon' size='65px'/>
          
-    else if (icon === 'cloudy')
-        return <IoMdPartlySunny className='wicon' size='40px'/>
+    else if (icon === 'Cloudy')
+        return <IoMdPartlySunny className='wicon' size='65px'/>
     
-    else if(icon === 'storm')
-        return <IoMdThunderstorm className='wicon' size='40px'/>
+    else if(icon === 'Storm')
+        return <IoMdThunderstorm className='wicon' size='65px'/>
     
-    else if(icon === 'rain')
-        return <IoMdRainy className='wicon' size='40px'/>
+    else if(icon === 'Rain')
+        return <IoMdRainy className='wicon' size='65px'/>
     
     else   
-        return <IoMdSunny className='wicon' size='40px'/>
+        return <IoMdSunny className='wicon' size='65px'/>
 };
 
 

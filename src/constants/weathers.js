@@ -1,4 +1,4 @@
-export const CLOUD = 'IoMdCloudy';
+export const CLOUDS = 'IoMdCloudy';
 export const CLOUDY = 'IoMdPartlySunny';
 export const SUN = 'IoMdSunny';
 export const RAIN = 'IoMdRainy';
