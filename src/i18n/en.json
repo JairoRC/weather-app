@@ -1,0 +1,11 @@
+{
+  "english": "English",
+  "spanish": "Spanish",
+  "london": "London",
+  "madrid": "Madrid",
+  "murcia": "Murcia",
+  "loading": "Loading...",
+  "temperature": "Temperature",
+  "min_temperature": "Min Temperature",
+  "max_temperature": "Max Temperature"
+}
