@@ -5,7 +5,10 @@
   "madrid": "Madrid",
   "murcia": "Murcia",
   "loading": "Loading...",
+  "select_city": "Select city",
   "temperature": "Temperature",
   "min_temperature": "Min Temperature",
-  "max_temperature": "Max Temperature"
+  "max_temperature": "Max Temperature",
+  "humidity": "Humidity",
+  "pressure": "Pressure"
 }

@@ -9,7 +9,6 @@ let cache = JSON.parse(localStorage.getItem("city")) || {};
 let currentLang = localStorage.getItem("currentLanguage") || "en";
 
 export const getWeather = async (city, language) => {
-  console.log(language, "lang");
   if (currentLang !== language) {
     cache = {};
     cache = {};
