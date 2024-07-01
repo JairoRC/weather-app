@@ -38,5 +38,6 @@ Para correr los tests, ejecute `npm test`.
 - React
 - i18next
 - react-i18next
+- Date-fns
 - Jest
 - React Testing Library
