@@ -39,7 +39,6 @@ const WeatherDisplay = () => {
     return parseFloat(temp).toFixed(1)
   }
 
-  
 const filterTodayWeather = (data) => {
   const today = new Date().toISOString().split('T')[0];
 
@@ -59,8 +58,6 @@ const todayWeather = filterTodayWeather(list).map(item => ({
   ...item,
   formattedTime: formatTimestampToTime(item.dt)
 }));
-
-console.log(todayWeather, 'dia de hoy');
 
   return (
     <div className="h-88dvh bg-gray-900 shadow-lg p-6 flex flex-col items-center">
