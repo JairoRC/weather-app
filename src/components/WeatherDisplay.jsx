@@ -42,7 +42,14 @@ const WeatherDisplay = () => {
   const filterTodayWeather = (data) => {
     const today = new Date().toISOString().split("T")[0];
 
-    return data.filter((item) => item.dt_txt.startsWith(today));
+    let todayResults = data.filter((item) => item.dt_txt.startsWith(today));
+
+    if (todayResults.length < 5) {
+      const additionalResults = data.slice(todayResults.length, 5);
+      todayResults = todayResults.concat(additionalResults);
+    }
+
+    return todayResults;
   };
 
   const formatTimestampToTime = (timestamp) => {
