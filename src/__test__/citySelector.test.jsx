@@ -9,24 +9,32 @@ jest.mock('react-i18next', () => ({
   }),
 }));
 
-test('renders CitySelector component', () => {
-  const mockSetCityData = jest.fn();
-  
-  render(<CitySelector cityData="London" setCityData={mockSetCityData} />);
-  
-  expect(screen.getByText('select_city')).toBeInTheDocument();
-  expect(screen.getByRole('combobox')).toHaveValue('London');
+describe('CitySelector', () => {
+  it('renders CitySelector component', () => {
+    const mockSetCityData = jest.fn();
+    
+    render(<CitySelector cityData="London" setCityData={mockSetCityData} />);
+    
+    expect(screen.getByText('select_city')).toBeInTheDocument();
+    expect(screen.getByRole('combobox')).toHaveValue('London');
+  });
 
-  fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Madrid' } });
-  expect(mockSetCityData).toHaveBeenCalledWith('Madrid');
-});
+  it('changes city and calls setCityData', () => {
+    const mockSetCityData = jest.fn();
+    
+    render(<CitySelector cityData="London" setCityData={mockSetCityData} />);
+    
+    fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Madrid' } });
+    expect(mockSetCityData).toHaveBeenCalledWith('Madrid');
+  });
 
-test('renders all city options', () => {
-  const mockSetCityData = jest.fn();
-
-  render(<CitySelector cityData="London" setCityData={mockSetCityData} />);
-
-  expect(screen.getByRole('option', { name: 'london' })).toBeInTheDocument();
-  expect(screen.getByRole('option', { name: 'madrid' })).toBeInTheDocument();
-  expect(screen.getByRole('option', { name: 'murcia' })).toBeInTheDocument();
+  it('renders all city options', () => {
+    const mockSetCityData = jest.fn();
+    
+    render(<CitySelector cityData="London" setCityData={mockSetCityData} />);
+    
+    expect(screen.getByRole('option', { name: 'london' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'madrid' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'murcia' })).toBeInTheDocument();
+  });
 });

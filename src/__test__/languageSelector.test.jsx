@@ -2,9 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import LanguageSelector from '../components/LanguageSelector';
-import { useTranslation } from 'react-i18next';
 
-// Definir un mock global de i18n
 const mockChangeLanguage = jest.fn();
 jest.mock('react-i18next', () => ({
   useTranslation: () => ({
