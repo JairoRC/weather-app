@@ -12,7 +12,7 @@
 
 - Para los distintos idiomas, hemos usado la libreria i18n, que usandola como contexto global de la aplicación, nos permite traducir de forma sencilla (mediante unos archivos json personalizados por nosotros mismos) nuestra aplicación a cualquier idioma que deseemos, recordar que no es automático, podemos traducir a cualquier idioma del cual podamos sacar nosotros la traducción.
 
-- Se incluyeron fotos de las ciudades para darle un toque agradable a la interfaz, como "upgrade" de la aplicación, si conociesemos todos los estados meteorológicos que pudisesemos obtener de la api (Soleado, lluvioso, Nublado, etc...) podriamos manejar diferentes imagenes de dichas ciudades con el estado actual del tiempo, o generar un fondo animado con dicho estado meteorológico.
+- Se incluyeron fotos de las ciudades para darle un toque agradable a la interfaz, como "upgrade" de la aplicación, si conociesemos todos los estados meteorológicos que pudiesemos obtener de la api (Soleado, lluvioso, Nublado, etc...) podriamos manejar diferentes imagenes de dichas ciudades con el estado actual del tiempo, o generar un fondo animado con dicho estado meteorológico.
 
 ## Demo
 
