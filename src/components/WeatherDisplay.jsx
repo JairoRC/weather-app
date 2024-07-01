@@ -36,79 +36,94 @@ const WeatherDisplay = () => {
   }
 
   function roundTemperature(temp) {
-    return parseFloat(temp).toFixed(1)
+    return parseFloat(temp).toFixed(1);
   }
 
-const filterTodayWeather = (data) => {
-  const today = new Date().toISOString().split('T')[0];
+  const filterTodayWeather = (data) => {
+    const today = new Date().toISOString().split("T")[0];
 
-  return data.filter(item => item.dt_txt.startsWith(today));
-};
+    return data.filter((item) => item.dt_txt.startsWith(today));
+  };
 
-const formatTimestampToTime = (timestamp) => {
-  const date = fromUnixTime(timestamp);
-  return format(date, 'HH:mm');
-};
+  const formatTimestampToTime = (timestamp) => {
+    const date = fromUnixTime(timestamp);
+    return format(date, "HH:mm");
+  };
 
-if (!weather) return <div>{t("loading")}</div>;
+  if (!weather) return <div>{t("loading")}</div>;
 
-const { list } = weather;
-const currentWeather = list[0];
-const todayWeather = filterTodayWeather(list).map(item => ({
-  ...item,
-  formattedTime: formatTimestampToTime(item.dt)
-}));
+  const { list } = weather;
+  const currentWeather = list[0];
+  const todayWeather = filterTodayWeather(list).map((item) => ({
+    ...item,
+    formattedTime: formatTimestampToTime(item.dt),
+  }));
 
   return (
-    <div className="h-88dvh bg-gray-900 shadow-lg p-6 flex flex-col items-center">
-      <CitySelector cityData={city} setCityData={setCity}/>
-        <div className="flex">
-          <div className="relative h-62 mr-6">
-            <img
-              src={cityImages[city]}
-              alt={city}
-              className="max-w-96 object-fill rounded-2xl"
-            />
-          </div>
-          <div className="flex-auto justify-evenly">
-            <div className="text-xl text-white font-semibold mt-1">
-              <div className="flex">
-                <img
-                  src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`}
-                  alt={currentWeather.weather[0].description}
-                  className="w-16 h-16"
-                />
-                <h1 className="text-4xl mt-2">{roundTemperature(currentWeather.main.temp)}°C</h1>
-              </div>
-              <p className="text-4xl ml-2 mb-2">{capitalizeWords(currentWeather.weather[0].description)}</p>
-              <p className="ml-2 text-gray-400">
-                {t("min_temperature")} {roundTemperature(currentWeather.main.temp_min)}°C
+    <div className="sm:h-88dvh bg-gray-900 shadow-lg p-6 flex flex-col items-center">
+      <CitySelector cityData={city} setCityData={setCity} />
+      <div className="flex flex-col sm:flex-row">
+        <div className="relative h-62 mr-0 sm:mr-6 mb-4 sm:mb-0">
+          <img
+            src={cityImages[city]}
+            alt={city}
+            className="max-w-full sm:max-w-96 object-fill rounded-2xl"
+          />
+        </div>
+        <div className="flex-auto justify-evenly">
+          <div className="text-xl text-white font-semibold mt-1 text-left">
+            <div className="flex flex-col sm:flex-row items-center">
+              <img
+                src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`}
+                alt={currentWeather.weather[0].description}
+                className="w-16 h-16"
+              />
+              <h1 className="text-4xl mt-2 sm:mt-0 sm:ml-4">
+                {roundTemperature(currentWeather.main.temp)}°C
+              </h1>
+            </div>
+            <div className="text-center sm:text-left">
+              <p className="text-4xl ml-0 sm:ml-2 mb-2">
+                {capitalizeWords(currentWeather.weather[0].description)}
               </p>
-              <p className="ml-2 text-gray-400">
-                {t("max_temperature")} {roundTemperature(currentWeather.main.temp_max)}°C
+              <p className="ml-0 sm:ml-2 text-gray-400">
+                {t("min_temperature")}{" "}
+                {roundTemperature(currentWeather.main.temp_min)}°C
               </p>
-              <p className="ml-2 text-gray-400">
-                {t("humidity")} {roundTemperature(currentWeather.main.humidity)}%
+              <p className="ml-0 sm:ml-2 text-gray-400">
+                {t("max_temperature")}{" "}
+                {roundTemperature(currentWeather.main.temp_max)}°C
               </p>
-              <p className="ml-2 text-gray-400">
-                {t("pressure")} {roundTemperature(currentWeather.main.pressure)}mbar
+              <p className="ml-0 sm:ml-2 text-gray-400">
+                {t("humidity")} {roundTemperature(currentWeather.main.humidity)}
+                %
+              </p>
+              <p className="ml-0 sm:ml-2 text-gray-400">
+                {t("pressure")} {roundTemperature(currentWeather.main.pressure)}
+                mbar
               </p>
             </div>
           </div>
+        </div>
       </div>
-      <div className="flex justify-center text-center w-full mt-6">
+      <div className="flex flex-wrap justify-center text-center w-full mt-6">
         {todayWeather.map((weatherItem, index) => (
-          <div key={index} className="flow-root text-white justify-between items-center mr-6 pt-2 pb-2 pl-2 pr-4 bg-gray-800 mb-2 rounded-lg">
+          <div
+            key={index}
+            className="flex flex-col items-center mr-2 sm:mr-6 mb-4 sm:mb-0 pt-2 pb-2 pl-2 pr-4 bg-gray-800 rounded-lg w-32 text-white"
+          >
             <div>
-            <span>🕛{weatherItem.formattedTime}</span>
+              <span>🕛{weatherItem.formattedTime}</span>
             </div>
-            <div className="flex">
+            <div className="flex items-center mt-2">
               <img
                 src={`http://openweathermap.org/img/wn/${weatherItem.weather[0].icon}.png`}
                 alt={weatherItem.weather[0].description}
                 className="w-10 h-10"
-                />
-              <span className="mt-2">{roundTemperature(weatherItem.main.temp)}°C</span>
+              />
+              <span className="">
+                {roundTemperature(weatherItem.main.temp)}°C
+              </span>
             </div>
           </div>
         ))}

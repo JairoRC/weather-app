@@ -5,8 +5,10 @@ const CitySelector = ({ cityData, setCityData }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex mb-4">
-      <h1 className="text-3xl text-white mr-4">{t("select_city")}</h1>
+    <div className="flex flex-col sm:flex-row mb-4 text-center sm:text-left items-center sm:items-start">
+      <h1 className="text-3xl text-white mb-2 sm:mb-0 sm:mr-4">
+        {t("select_city")}
+      </h1>
       <select
         value={cityData}
         onChange={(e) => setCityData(e.target.value)}
