@@ -106,13 +106,13 @@ console.log(todayWeather, 'dia de hoy');
             <span>🕛{weatherItem.formattedTime}</span>
             </div>
             <div className="flex">
-            <img
-              src={`http://openweathermap.org/img/wn/${weatherItem.weather[0].icon}.png`}
-              alt={weatherItem.weather[0].description}
-              className="w-10 h-10"
-              />
-            <span className="mt-2">{roundTemperature(weatherItem.main.temp)}°C</span>
-              </div>
+              <img
+                src={`http://openweathermap.org/img/wn/${weatherItem.weather[0].icon}.png`}
+                alt={weatherItem.weather[0].description}
+                className="w-10 h-10"
+                />
+              <span className="mt-2">{roundTemperature(weatherItem.main.temp)}°C</span>
+            </div>
           </div>
         ))}
       </div>

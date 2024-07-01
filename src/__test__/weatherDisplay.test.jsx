@@ -28,6 +28,8 @@ jest.mock('../i18n/i18n', () => ({
 
 const mockWeatherData = {
   list: [{
+    dt_txt: '2024-07-01 03:00:00',
+    dt: 1719802800,
     main: {
       temp: 15,
       temp_min: 10,
@@ -40,6 +42,18 @@ const mockWeatherData = {
       icon: '01d',
     }]
   }]
+};
+
+const filterTodayWeather = (data) => {
+  const today = new Date().toISOString().split('T')[0];
+  return data.filter(item => item.dt_txt.startsWith(today));
+};
+
+const formatTimestampToTime = (timestamp) => {
+  const date = new Date(timestamp * 1000);
+  const hours = ('0' + date.getHours()).slice(-2);
+  const minutes = ('0' + date.getMinutes()).slice(-2);
+  return `${hours}:${minutes}`;
 };
 
 describe('WeatherDisplay', () => {
@@ -57,13 +71,24 @@ describe('WeatherDisplay', () => {
   it('fetches and displays weather data', async () => {
     render(<WeatherDisplay />);
     await waitFor(() => expect(getWeather).toHaveBeenCalledTimes(1));
+    
+    const temperatureElements = screen.getAllByText(/15.0°C/i);
+    expect(temperatureElements.length).toBeGreaterThan(0);
 
-    expect(screen.getByText(/clear sky/i)).toBeInTheDocument();
-    expect(screen.getByText(/15.0°C/i)).toBeInTheDocument();
-    expect(screen.getByText(/min_temperature 10.0°C/i)).toBeInTheDocument();
-    expect(screen.getByText(/max_temperature 20.0°C/i)).toBeInTheDocument();
-    expect(screen.getByText(/humidity 50.0%/i)).toBeInTheDocument();
-    expect(screen.getByText(/pressure 1013.0mbar/i)).toBeInTheDocument();
+    const descriptionElements = screen.getAllByText(/clear sky/i);
+    expect(descriptionElements.length).toBeGreaterThan(0);
+
+    const minTempElements = screen.getAllByText(/min_temperature 10.0°C/i);
+    expect(minTempElements.length).toBeGreaterThan(0);
+
+    const maxTempElements = screen.getAllByText(/max_temperature 20.0°C/i);
+    expect(maxTempElements.length).toBeGreaterThan(0);
+
+    const humidityElements = screen.getAllByText(/humidity 50.0%/i);
+    expect(humidityElements.length).toBeGreaterThan(0);
+
+    const pressureElements = screen.getAllByText(/pressure 1013.0mbar/i);
+    expect(pressureElements.length).toBeGreaterThan(0);
   });
 
   it('changes city and fetches new weather data', async () => {
