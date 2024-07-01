@@ -1,0 +1,14 @@
+{
+  "english": "Inglés",
+  "spanish": "Español",
+  "london": "Londres",
+  "madrid": "Madrid",
+  "murcia": "Murcia",
+  "loading": "Cargando...",
+  "select_city": "Seleccione la ciudad",
+  "temperature": "Temperatura",
+  "min_temperature": "Temperatura mínima",
+  "max_temperature": "Temperatura máxima",
+  "humidity": "Humedad",
+  "pressure": "Presión"
+}
