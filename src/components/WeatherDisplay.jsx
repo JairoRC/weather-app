@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { format, fromUnixTime } from "date-fns";
 import { getWeather } from "../services/weatherService";
 import londonImage from "../images/London.png";
 import madridImage from "../images/Madrid.png";
@@ -38,10 +39,28 @@ const WeatherDisplay = () => {
     return parseFloat(temp).toFixed(1)
   }
 
-  if (!weather) return <div>{t("loading")}</div>;
+  
+const filterTodayWeather = (data) => {
+  const today = new Date().toISOString().split('T')[0];
 
-  const { list } = weather;
-  const currentWeather = list[0];
+  return data.filter(item => item.dt_txt.startsWith(today));
+};
+
+const formatTimestampToTime = (timestamp) => {
+  const date = fromUnixTime(timestamp);
+  return format(date, 'HH:mm');
+};
+
+if (!weather) return <div>{t("loading")}</div>;
+
+const { list } = weather;
+const currentWeather = list[0];
+const todayWeather = filterTodayWeather(list).map(item => ({
+  ...item,
+  formattedTime: formatTimestampToTime(item.dt)
+}));
+
+console.log(todayWeather, 'dia de hoy');
 
   return (
     <div className="h-88dvh bg-gray-900 shadow-lg p-6 flex flex-col items-center">
@@ -54,7 +73,6 @@ const WeatherDisplay = () => {
               className="max-w-96 object-fill rounded-2xl"
             />
           </div>
-          
           <div className="flex-auto justify-evenly">
             <div className="text-xl text-white font-semibold mt-1">
               <div className="flex">
@@ -80,6 +98,23 @@ const WeatherDisplay = () => {
               </p>
             </div>
           </div>
+      </div>
+      <div className="flex justify-center text-center w-full mt-6">
+        {todayWeather.map((weatherItem, index) => (
+          <div key={index} className="flow-root text-white justify-between items-center mr-6 pt-2 pb-2 pl-2 pr-4 bg-gray-800 mb-2 rounded-lg">
+            <div>
+            <span>🕛{weatherItem.formattedTime}</span>
+            </div>
+            <div className="flex">
+            <img
+              src={`http://openweathermap.org/img/wn/${weatherItem.weather[0].icon}.png`}
+              alt={weatherItem.weather[0].description}
+              className="w-10 h-10"
+              />
+            <span className="mt-2">{roundTemperature(weatherItem.main.temp)}°C</span>
+              </div>
+          </div>
+        ))}
       </div>
     </div>
   );
